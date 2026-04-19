@@ -1,0 +1,22 @@
+# Dependências
+node_modules/
+
+# Build do TypeScript
+dist/
+build/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Ambiente (NUNCA subir pro git)
+.env
+
+# Sistema / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Cache do TypeScript
+*.tsbuildinfo
