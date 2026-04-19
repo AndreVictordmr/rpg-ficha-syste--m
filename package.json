@@ -1,8 +1,13 @@
 {
+  "name": "rpg-ficha-system",
+  "version": "1.0.0",
+  "type": "module",
   "dependencies": {
     "express": "^5.2.1"
   },
   "devDependencies": {
-    "@types/express": "^5.0.6"
+    "@types/express": "^5.0.6",
+    "tsx": "^4.19.0",
+    "typescript": "^5.0.0"
   }
 }
