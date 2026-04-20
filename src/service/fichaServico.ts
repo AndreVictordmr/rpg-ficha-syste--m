@@ -8,7 +8,7 @@ interface Ficha{
   atributos?: Record<string,number>;
   habilidades?:Record<string,string>;
 }
-export class fichaServico{
+export class FichaServico{
   private bd:Ficha[]=[];
   constructor(){
     const dados = fs.readFileSync(PATH.db_path, 'utf-8');
@@ -79,13 +79,28 @@ export class fichaServico{
     return this.bd[entradaId];
   }
   
-  
+  listarFichas(){
+    return [...this.bd];
+  }
   selecionarPorId(id:number):Ficha|undefined{
     const verificaId = UTIL.validarNumeros(id);
     if( verificaId ){
       const busca = this.bd.find(f=> f.id === id)
       if(busca === undefined) throw new Error("Id não registrado");
       return busca;
+    }else{
+      throw new Error("Id invalido");
+    }
+  }
+
+  deletarID(id:number){
+    const verificaId = UTIL.validarNumeros(id);
+    if( verificaId ){
+      const busca = this.bd.findIndex(f=> f.id === id)
+      if(busca === -1) throw new Error("Id não registrado");
+      this.bd = this.bd.filter(f => f.id !== busca);
+      this.salvarNoArquivo();
+      return { mensagem: "Ficha deletada com sucesso" };
     }else{
       throw new Error("Id invalido");
     }
