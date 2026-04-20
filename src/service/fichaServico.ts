@@ -10,7 +10,7 @@ interface Ficha{
 class fichaServico{
   private bd:Ficha[]=[];
   constructor(){
-    const dados = fs.readFileSync(PATH.db_file, 'utf-8');
+    const dados = fs.readFileSync(PATH.db_path, 'utf-8');
     this.bd = JSON.parse(dados||"[]");
   }
   creat(ficha:Ficha){
