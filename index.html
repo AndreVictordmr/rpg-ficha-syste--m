@@ -20,22 +20,22 @@
             <section class="form">
                 <div class="nomeForm">
                     <input type="number" hidden id="id">
-                    <label for="name"></label>
+                    <label for="name">Nome: </label>
                     <input type="text" id="nome" placeholder="Nome personagem">
                 </div>
-                <button type="button" class="btn_plus">Adicionar Atributos</button>
-                <div class="atribuForm">
+                <button type="button" id='add_atributos' class="btn_plus">Adicionar Atributos</button>
+                <div class="atribuForm" hidden>
                     <div class="atributo">
                         <button type="button" class="btn_incremeto">+</button>
                     </div>
                 </div>
-                <button type="button" class="btn_plus">Adicionar Habilidades</button>
-                <div class="skillForm">
+                <button type="button" id='addskill' class="btn_plus">Adicionar Habilidades</button>
+                <div class="skillForm" hidden>
                     <div class="skill">
                         <button type="button" class="btn_incremeto">+</button>
                     </div>
                 </div>
-                <button id="btnForm">Criar Ficha</button>
+                <button type="button" id="btnForm">Criar Ficha</button>
             </section>
             <section id="lista">
                 <h2>Lista de Personagem</h2>
