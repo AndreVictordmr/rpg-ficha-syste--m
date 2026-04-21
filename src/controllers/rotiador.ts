@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { SystemaBase } from './controllers/systemaBase';
+import { SystemaBase } from '../controllers/systemaBase.js';
 
 const routes = Router();
 

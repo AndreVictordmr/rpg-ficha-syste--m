@@ -1,5 +1,5 @@
-import { Request, Response } from "express";
-import { fichaServico } from "../service/fichaServico";
+import type { Request, Response } from "express";
+import { FichaServico } from "../service/fichaServico.js";
 
 
 const service = new FichaServico();

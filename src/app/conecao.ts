@@ -1,6 +1,6 @@
 import express from "express";
-import {PATH} from '../config/path';
-import rotas from "../controllers/rotiador";
+import {PATH} from '../config/path.js';
+import rotas from "../controllers/rotiador.js";
 
 const app = express();
 
