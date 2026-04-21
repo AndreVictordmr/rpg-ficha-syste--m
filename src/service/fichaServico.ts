@@ -1,6 +1,6 @@
 import fs from 'fs';
-import {PATH} from '../config/path'; 
-import { UTIL } from "../util";
+import {PATH} from '../config/path.js'; 
+import { UTIL } from "../util.js";
 
 interface Ficha{
   id:number;
@@ -22,14 +22,12 @@ export class FichaServico{
     const verificaNome = UTIL.validarTexto(ficha.nome);
     if(verificaId && verificaNome ){
             if (ficha.atributos !== undefined) {
-        for( const atributo in ficha.atributos){
-          const valor = ficha.atributos[atributo];
+        for( const [atributo,valor] of Object.entries(ficha.atributos)){
           if(!UTIL.validarNumeros(valor)) throw new Error(`${atributo} com valor invalido`);
         }
       }
       if (ficha.habilidades !== undefined) {
-        for( const skill in ficha.habilidades){
-          const valor = ficha.habilidades[skill];
+        for( const [skill,valor] of Object.entries(ficha.habilidades)){
           if(!UTIL.validarTexto(valor)) throw new Error(`${skill} com valor invalido`);
         }
       }
@@ -49,34 +47,33 @@ export class FichaServico{
   editar(id:number,dado:Partial<Ficha>){  
     const verificaId = UTIL.validarNumeros(id);
     if(!verificaId) throw new Error("Id não valido");
-      const entradaId= this.bd.findIndex(f=>f.id===id);
-      if(entradaId === -1 ) throw new Error("Ficha não encontrada");
+      const fichaSelec= this.bd.find(f=>f.id===id);
+      if(!fichaSelec ) throw new Error("Ficha não encontrada");
       
       if (dado.nome !== undefined) {
         if(!UTIL.validarTexto(dado.nome)) throw new Error("Nome invalido");
       }
       if (dado.atributos !== undefined) {
-        for( const atributo in dado.atributos){
-          const valor = dado.atributos[atributo];
+        for( const [atributo,valor] of Object.entries(dado.atributos)){
           if(!UTIL.validarNumeros(valor)) throw new Error(`${atributo} com valor invalido`);
         }
       }
       if (dado.habilidades !== undefined) {
-        for( const skill in dado.habilidades){
-          const valor = dado.habilidades[skill];
+        for( const [skill,valor] of Object.entries(dado.habilidades)){
+         // const valor = dado.habilidades[skill];
           if(!UTIL.validarTexto(valor)) throw new Error(`${skill} com valor invalido`);
         }
       }
       
-    this.bd[entradaId] = { 
-      ...this.bd[entradaId], 
+    const fichaAtual: Ficha={
+      ...fichaSelec,
       ...dado,
-    
-      id: this.bd[entradaId].id 
-    };
-
+      id:fichaSelec.id,
+    }
+    const index = this.bd.findIndex(f => f.id === fichaSelec.id);
+    this.bd[index] = fichaAtual;
     this.salvarNoArquivo();
-    return this.bd[entradaId];
+    return fichaAtual;
   }
   
   listarFichas(){

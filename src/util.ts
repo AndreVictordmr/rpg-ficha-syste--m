@@ -1,4 +1,6 @@
-export function validarTexto(texto:string): boolean{
+export class UTIL{
+
+static validarTexto(texto:string): boolean{
     if(!texto) return false;
     const textoValido = texto.trim();
     if(texto.length === 0) return false;
@@ -6,8 +8,9 @@ export function validarTexto(texto:string): boolean{
     return caracterPermitidos.test(textoValido);
 }
 
-export function validarNumeros(valor:number):boolean{
+static validarNumeros(valor:number):boolean{
     if(isNaN(valor)) return false;
     if(valor == null|| valor == undefined) return false;
     return valor>=0;
+}
 }
